@@ -52,6 +52,38 @@
 - Dzień 3: Testowanie i poprawki
 - Dzień 4: Dokumentacja
 
+## Uodpornienie aplikacji na działania użytkownika
+
+### Walidacja odpowiedzi
+- Sprawdzanie czy użytkownik wpisał A, B, C lub D (wielkość liter nie ma znaczenia)
+- Powtarzanie pytania dopóki nie poda poprawnej odpowiedzi
+- Komunikat o nieprawidłowej odpowiedzi
+
+### Obsługa pustych danych
+- Sprawdzanie czy pliki pytania.txt i odpowiedzi.txt nie są puste
+- Komunikat błędu gdy brak pytań lub odpowiedzi
+- Obsługa sytuacji gdy wylosowana liczba pytań > dostępnych
+
+### Mapowanie pytań do odpowiedzi
+- Przechowywanie numeru pytania razem z wylosowanymi pytaniami
+- Słownik: {numer_pytania: poprawna_odpowiedź}
+- Klucz: numer w oryginalnym pliku, nie indeks wylosowanej listy
+
+### Walidacja inputu użytkownika
+- Sprawdzanie czy imie i nazwisko nie są puste
+- Obsługa polskich znaków (ą, ę, ł, itp.)
+- Ograniczenie długości inputu (np. max 50 znaków)
+
+### Obsługa błędnego formatu plików
+- Pomijanie pustych linii
+- Walidacja formatu odpowiedzi.txt (numer:litera)
+- Ignorowanie linii bez znaku ":"
+
+### Obsługa wyjątków
+- Try-except przy operacjach na plikach
+- Komunikaty błędów zamiast crash aplikacji
+- Logowanie błędów (opcjonalnie)
+
 ## Wymagania techniczne
 - Python 3.x
 - Pliki w formacie UTF-8
