@@ -1,0 +1,12 @@
+Paryż, Londyn, Berlin, Madryt
+4, 3, 5, 6
+Adam Mickiewicz, Juliusz Słowacki, Henryk Sienkiewicz, Bolesław Prus
+Ocean Spokojny, Ocean Atlantycki, Ocean Indyjski, Ocean Arktyczny
+Tlen, Wodór, Azot, Hel
+2004, 1999, 2010, 1995
+Parowanie, Skraplanie, Sublimacja, Resublimacja
+7, 5, 6, 8
+Neil Armstrong, Buzz Aldrin, Jurij Gagarin, Michael Collins
+Nil, Amazonka, Jangcy, Missisipi
+Jowisz, Mars, Ziemia, Saturn
+3, 2, 4, 5
