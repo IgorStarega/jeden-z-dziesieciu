@@ -1,12 +1,95 @@
+1
 Jak nazywa się stolica Francji?
+Paryż
+Londyn
+Berlin
+Madryt
+------
+
+2
 Ile wynosi 2+2?
+4
+3
+5
+6
+-
+
+3
 Kto napisał "Pan Tadeusz"?
+Adam Mickiewicz
+Juliusz Słowacki
+Henryk Sienkiewicz
+Bolesław Prus
+-------------
+
+4
 Jaki jest największy ocean na Ziemi?
+Ocean Spokojny
+Ocean Atlantycki
+Ocean Indyjski
+Ocean Arktyczny
+---------------
+
+5
 Który pierwiastek ma symbol O?
+Tlen
+Wodór
+Azot
+Hel
+---
+
+6
 W którym roku Polska przystąpiła do UE?
+2004
+1999
+2010
+1995
+----
+
+7
 Jak nazywa się proces zamiany cieczy w gaz?
+Parowanie
+Skraplanie
+Sublimacja
+Resublimacja
+------------
+
+8
 Ile kontynentów jest na Ziemi?
+7
+5
+6
+8
+-
+
+9
 Kto był pierwszym człowiekiem na Księżycu?
+Neil Armstrong
+Buzz Aldrin
+Jurij Gagarin
+Michael Collins
+---------------
+
+10
 Jak nazywa się najdłuższa rzeka świata?
+Nil
+Amazonka
+Jangcy
+Missisipi
+---------
+
+11
 Jak nazywa się największa planeta w Układzie Słonecznym?
+Jowisz
+Mars
+Ziemia
+Saturn
+------
+
+12
 Ile wynosi pierwiastek kwadratowy z 9?
+3
+2
+4
+5
+-
