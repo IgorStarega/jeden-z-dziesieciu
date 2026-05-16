@@ -1,75 +1,61 @@
 import random, os, datetime
 
 def wczytaj_dane():
+    # upewniamy się że pliki istnieją, jeśli nie to zwracamy None
     if not os.path.exists("pytania.txt") or not os.path.exists("odpowiedzi.txt"):
         print("Brak plików z pytaniami lub odpowiedziami.")
-        return None
-    
+        return None, None
     pytania = []
     with open("pytania.txt", encoding="utf-8") as f:
-        lines = [l.strip() for l in f if l.strip() and l.strip() != "==="]
-    
+        blok = []
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("="):
+                blok.append(line)
+            elif len(blok) >= 6:
+                pytania.append(blok[:6])
+                blok = []
+        if len(blok) >= 6: pytania.append(blok[:6])
+    # wczytujemy które odpowiedzi są poprawne
     odpowiedzi = {}
     with open("odpowiedzi.txt", encoding="utf-8") as f:
         for line in f:
             if ":" in line:
-                nr, litera = line.strip().split(":")
-                odpowiedzi[int(nr)] = litera.strip()
-    
-    return {"pytania": lines, "odpowiedzi": odpowiedzi}
-
-def uruchom_quiz(baza, k):
-    if baza is None:
-        return 0
-    
-    wszystkie = baza["pytania"]
-    odpowiedzi = baza["odpowiedzi"]
-   
-     # Losuj 10-20 pytań (k z parametru lub domyślnie 15)
-    n = k if k else 15
-    wylosowane = random.sample(wszystkie, min(n, len(wszystkie)))
-    
-    wynik = 0
-    
-    for i, pytanie in enumerate(wylosowane, 1):
-        print(f"\n{i}. {pytanie}")
-        # UWAGA: pytania.txt w obecnym formacie nie zawiera podziału na odpowiedzi A-D
-        # Zakładając format: "Treść pytania?" + "Odpowiedź A" + "Odpowiedź B" + ...
-        
-        odp = input("Wpisz odpowiedź (A/B/C/D): ").upper()
-        
-        # Sprawdź czy poprawna (szukamy w słowniku odpowiedzi)
-        # Problem: jak mapować wylosowane pytanie do numeru w odpowiedzi.txt?
-        
-        if odp == odpowiedzi.get(i, ""):
-            wynik += 1
-            print("✓ Poprawna!")
-        else:
-            print("✗ Błąd!")
-    
-    return wynik
-
-def zapisz_wyniki(imie, nazwisko, wynik, k):
-    # Format imie;nazwisko;wynik;liczba_pytan;data
-    data = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    with open("wyniki.txt", "a", encoding="utf-8") as f:
-        f.write(f"{imie};{nazwisko};{wynik};{k};{data}\n")
+                nr, lit = line.strip().split(":")
+                odpowiedzi[int(nr)] = lit.strip()
+    return pytania, odpowiedzi
 
 def main():
     print("Witaj w quizie!")
-    imie = input("Podaj swoje imię: ")
-    nazwisko = input("Podaj swoje nazwisko: ")
-
-    baza = wczytaj_dane()
-    if baza is None:
-        print ("Nie można uruchomić quizu.")
-        return
-    
-    wynik = uruchom_quiz(baza, k=15)
-
-    print (f"\nTwój wynik: {wynik} / 15")
-    zapisz_wyniki(imie, nazwisko, wynik, 15)
-    print("Wynik zapisany. Dziękujemy za udział!")
+    imie = input("Podaj imię: ").strip()
+    nazwisko = input("Podaj nazwisko: ").strip()
+    pytania, odpowiedzi = wczytaj_dane()
+    if not pytania: return print("Nie można uruchomić quizu.")
+    # losujemy kolejność pytań i bierzemy 15 (albo tyle ile jest)
+    random.shuffle(pytania)
+    k = min(15, len(pytania))
+    wynik = 0
+    for i, p in enumerate(pytania[:k], 1):
+        print(f"\n{i}. {p[1]}")
+        print(f"  A) {p[2]}   B) {p[3]}   C) {p[4]}   D) {p[5]}")
+        odp = input("Wpisz odpowiedź (A/B/C/D): ").upper()
+        # pętla dopóki ktoś nie wpisze A B C D
+        while odp not in "ABCD":
+            odp = input("Nieprawidłowa! Wpisz A/B/C/D: ").upper()
+        if odp == odpowiedzi.get(p[0], ""):
+            wynik += 1; print("Poprawna!")
+        else:
+            print(f"Błąd! Poprawna: {odpowiedzi.get(p[0], '?')}")
+    print(f"\nTwój wynik: {wynik}/{k}")
+    data = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    # dopisuje wynik do pliku, jesli plik jest pusty to dodaje naglówek
+    with open("wyniki.txt", "a+", encoding="utf-8") as f:
+        f.seek(0)
+        if not f.read():
+            f.write(f"{'Imię':<12} {'Nazwisko':<15} {'Wynik':<7} {'Razem':<7} {'Data':<20}\n")
+            f.write("-" * 65 + "\n")
+        f.write(f"{imie:<12} {nazwisko:<15} {wynik:<7} {k:<7} {data:<20}\n")
+    print("Wynik zapisany. Dziękujemy!")
 
 if __name__ == "__main__":
     main()
